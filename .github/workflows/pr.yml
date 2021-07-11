@@ -1,0 +1,36 @@
+name: PR Open
+
+on:
+  pull_request:
+    paths-ignore:
+      - '**/*.md'
+
+jobs:
+  deployment:
+    name: setup
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.draft == false
+    steps:
+      - name: Install Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: 0.14.8
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Write config
+        run: |
+          cp terraform.tfvars.example terraform.tfvars
+        working-directory: examples/default
+      - name: TF Create
+        run: |
+          make
+        env:
+          TF_VAR_api_token: ${{ secrets.okta_api_token }}
+          TF_VAR_org_name: ${{ secrets.okta_org_name }}
+      - name: TF Destroy
+        run: |
+          make clean || true
+        if: ${{ always() }}
+        env:
+          TF_VAR_api_token: ${{ secrets.okta_api_token }}
+          TF_VAR_org_name: ${{ secrets.okta_org_name }}

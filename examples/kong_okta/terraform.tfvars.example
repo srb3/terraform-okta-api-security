@@ -1,0 +1,146 @@
+users = {
+  "jdoe@konghq.com" = {
+    email      = "jdoe@konghq.com"
+    first_name = "Jane"
+    last_name  = "Doe"
+    password   = "Zaq12wsx!"
+    workspaces = ["default"]
+    groups     = ["default-super-admin-group"]
+    apps       = ["manager-app"]
+  },
+  "bob@konghq.com" = {
+    email      = "bob@konghq.com"
+    first_name = "Bob"
+    last_name  = "Bobson"
+    password   = "Zaq12wsx!"
+    workspaces = ["default"]
+    groups     = ["default-admin-group"]
+    apps       = ["manager-app"]
+  },
+  "jo@konghq.com" = {
+    email      = "jo@konghq.com"
+    first_name = "Jo"
+    last_name  = "Joson"
+    password   = "Zaq12wsx!"
+    workspaces = ["default"]
+    groups     = ["default-read-only-group"]
+    apps       = ["manager-app"]
+  },
+  "anna@konghq.com" = {
+    email      = "anna@konghq.com"
+    first_name = "Anna"
+    last_name  = "Annason"
+    password   = "Zaq12wsx!"
+    workspaces = ["dev"]
+    groups     = ["dev-admin-group"]
+    apps       = ["manager-app"]
+  },
+  "dora@konghq.com" = {
+    email      = "dora@konghq.com"
+    first_name = "Dora"
+    last_name  = "Dorason"
+    password   = "Zaq12wsx!"
+    workspaces = ["dev"]
+    groups     = ["dev-read-only-group"]
+    apps       = ["manager-app"]
+  },
+  "cleo@konghq.com" = {
+    email      = "cleo@konghq.com"
+    first_name = "Cleo"
+    last_name  = "Cleoson"
+    password   = "Zaq12wsx!"
+    workspaces = ["stage"]
+    groups     = ["stage-admin-group"]
+    apps       = ["manager-app"]
+  },
+  "milly@konghq.com" = {
+    email      = "milly@konghq.com"
+    first_name = "Milly"
+    last_name  = "Millson"
+    password   = "Zaq12wsx!"
+    workspaces = ["stage"]
+    groups     = ["stage-read-only-group"]
+    apps       = ["manager-app"]
+  },
+  "shelly@konghq.com" = {
+    email      = "shelly@konghq.com"
+    first_name = "Shelly"
+    last_name  = "Shellson"
+    password   = "Zaq12wsx!"
+    workspaces = ["prod"]
+    groups     = ["prod-admin-group"]
+    apps       = ["manager-app"]
+  },
+  "patch@konghq.com" = {
+    email      = "patch@konghq.com"
+    first_name = "Patch"
+    last_name  = "Patchson"
+    password   = "Zaq12wsx!"
+    workspaces = ["prod"]
+    groups     = ["prod-read-only-group"]
+    apps       = ["manager-app"]
+  },
+  "clarissa@konghq.com" = {
+    email      = "clarissa@konghq.com"
+    first_name = "Clarissa"
+    last_name  = "Mao"
+    password   = "Zaq12wsx!"
+    workspaces = ["default"]
+    groups     = ["app-team-group"]
+    apps       = ["portal-app", "proxy-app"]
+  },
+  "camina@konghq.com" = {
+    email      = "camina@konghq.com"
+    first_name = "Caminia"
+    last_name  = "Drummer"
+    password   = "Zaq12wsx!"
+    workspaces = ["default"]
+    groups     = ["app-team-group"]
+    apps       = ["portal-app", "proxy-app"]
+  },
+  "amos@konghq.com" = {
+    email      = "amos@konghq.com"
+    first_name = "Amos"
+    last_name  = "Burton"
+    password   = "Zaq12wsx!"
+    workspaces = ["default"]
+    groups     = ["app-team-group"]
+    apps       = ["portal-app", "proxy-app"]
+  },
+  "james@konghq.com" = {
+    email      = "james@konghq.com"
+    first_name = "James"
+    last_name  = "Holden"
+    password   = "Zaq12wsx!"
+    workspaces = ["stage"]
+    groups     = ["app-team-group"]
+    apps       = ["portal-app", "proxy-app"]
+  },
+  "bobbie@konghq.com" = {
+    email      = "bobbie@konghq.com"
+    first_name = "Bobbie"
+    last_name  = "Draper"
+    password   = "Zaq12wsx!"
+    workspaces = ["stage"]
+    groups     = ["app-team-group"]
+    apps       = ["portal-app", "proxy-app"]
+  },
+  "alex@konghq.com" = {
+    email      = "alex@konghq.com"
+    first_name = "Alex"
+    last_name  = "Kamal"
+    password   = "Zaq12wsx!"
+    workspaces = ["prod"]
+    groups     = ["app-team-group"]
+    apps       = ["portal-app", "proxy-app"]
+  },
+  "fred@konghq.com" = {
+    email      = "fred@konghq.com"
+    first_name = "Fred"
+    last_name  = "Johnson"
+    password   = "Zaq12wsx!"
+    workspaces = ["prod"]
+    groups     = ["app-team-group"]
+    apps       = ["portal-app", "proxy-app"]
+  }
+}
