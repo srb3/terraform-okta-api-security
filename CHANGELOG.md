@@ -1,8 +1,18 @@
 # Changelog
 
-## 0.0.1
+## 0.0.2
 
-💥 Breaking changes:
+🆕 New features:
+
+- Added outputs for the client_id and secret of
+  each application.
+
+- Added outputs that return the client_id and client_secret
+  of the first application that was created
+
+  ([PR #2](https://github.com/srb3/terraform-okta-api-security/pull/2))
+
+## 0.0.1
 
 🆕 New features:
 
