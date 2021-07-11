@@ -46,6 +46,7 @@ resource "okta_auth_server_scope" "this-scope" {
   name             = each.key
   consent          = each.value.consent
   description      = each.value.description
+  default          = each.value.default
   depends_on       = [okta_auth_server_policy_rule.this-auth-server-policy-rule]
 }
 

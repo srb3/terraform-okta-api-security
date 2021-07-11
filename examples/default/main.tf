@@ -36,6 +36,7 @@ locals {
       metadata_publish = "NO_CLIENTS"
       consent          = "IMPLICIT"
       description      = "Allows the requesting of a users groups"
+      default          = true
     }
   }
   auth_server_claim_expression = {

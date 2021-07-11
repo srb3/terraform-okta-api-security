@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.0.3
+
+💥 Breaking changes / 🆕 New features:
+
+- Added functionality to set auth_server_scopes as
+  the default scope for an authorization server
+
+  ([PR #3](https://github.com/srb3/terraform-okta-api-security/pull/3))
+
 ## 0.0.2
 
 🆕 New features:
