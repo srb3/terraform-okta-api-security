@@ -66,6 +66,7 @@ variable "auth_server_scopes" {
     metadata_publish = string
     consent          = string
     description      = string
+    default          = bool
   }))
   default = {}
 }
