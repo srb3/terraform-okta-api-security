@@ -44,3 +44,19 @@ output "end_session_endpoint" {
 output "authorization_endpoint" {
   value = jsondecode(data.http.metadata.body).authorization_endpoint
 }
+
+output "client_id" {
+  value = [for k, v in okta_app_oauth.this-oauth-app : v.client_id]
+}
+
+output "client_secret" {
+  value = [for k, v in okta_app_oauth.this-oauth-app : v.client_secret]
+}
+
+output "first_client_id" {
+  value = [for k, v in okta_app_oauth.this-oauth-app : v.client_id].0
+}
+
+output "first_client_secret" {
+  value = [for k, v in okta_app_oauth.this-oauth-app : v.client_secret].0
+}
