@@ -57,7 +57,6 @@ resource "okta_auth_server_claim" "this-claim-expression" {
   name           = each.key
   value          = each.value.value
   claim_type     = each.value.claim_type
-  #depends_on     = [okta_auth_server_scope.this-scope]
 }
 
 ########### Auth Server Claim Group ##############
@@ -86,7 +85,7 @@ resource "okta_auth_server_claim" "groups" {
 ########### App Oauth ############################
 
 resource "okta_app_oauth" "this-oauth-app" {
-  for_each                  = var.app_oauth
+  for_each                  = var.oauth_apps
   label                     = each.key
   type                      = each.value.type
   grant_types               = each.value.grant_types
@@ -95,9 +94,8 @@ resource "okta_app_oauth" "this-oauth-app" {
   post_logout_redirect_uris = each.value.post_logout_redirect_uris
   consent_method            = each.value.consent_method
   response_types            = each.value.response_types
-  #depends_on                = [okta_auth_server_claim.groups]
   lifecycle {
-    ignore_changes = [groups]
+    ignore_changes = [users, groups]
   }
 }
 
@@ -110,7 +108,6 @@ resource "okta_user" "this-user" {
   login      = each.key
   email      = each.value.email
   password   = each.value.password
-  #depends_on = [okta_app_oauth.this-oauth-app]
 }
 
 ########### Groups ###############################
@@ -122,38 +119,40 @@ locals {
     ]
   ]))
 
-  user_ids = flatten([for k, v in okta_user.this-user :
+  user_group_app_ids = flatten([for k, v in okta_user.this-user :
     [for x in var.users[k].groups :
       [for y in var.users[k].apps :
         "${v.id}~${okta_group.this-group[x].id}~${okta_app_oauth.this-oauth-app[y].id}"
       ]
     ]
   ])
-
 }
 
 resource "okta_group" "this-group" {
   for_each = { for x in local.groups : x => { "name" = x } }
   name     = each.key
-  #  depends_on = [okta_user.this-user]
 }
 
 ############ User + group assignment #############
 
-resource "okta_group_membership" "test-group-membership" {
-  count    = length(local.user_ids)
-  user_id  = split("~", local.user_ids[count.index])[0]
-  group_id = split("~", local.user_ids[count.index])[1]
-  #  depends_on = [okta_user.this-user, okta_group.this-group]
+resource "okta_group_membership" "this-group-membership" {
+  count      = length(local.user_group_app_ids)
+  user_id    = split("~", local.user_group_app_ids[count.index])[0]
+  group_id   = split("~", local.user_group_app_ids[count.index])[1]
+  depends_on = [okta_group.this-group, okta_user.this-user]
 }
 
 ############ Group + App assignment ##############
 
-resource "okta_app_group_assignment" "kauto-app-test-admin" {
-  count    = length(local.user_ids)
-  group_id = split("~", local.user_ids[count.index])[1]
-  app_id   = split("~", local.user_ids[count.index])[2]
-  #depends_on = [okta_app_oauth.this-oauth-app, okta_group.this-group]
+resource "okta_app_group_assignment" "this-app-group-assignment" {
+  count             = length(local.user_group_app_ids)
+  group_id          = split("~", local.user_group_app_ids[count.index])[1]
+  app_id            = split("~", local.user_group_app_ids[count.index])[2]
+  retain_assignment = true
+  depends_on        = [okta_group_membership.this-group-membership]
+  lifecycle {
+    ignore_changes = [priority]
+  }
 }
 
 ########### Output Helpers #######################

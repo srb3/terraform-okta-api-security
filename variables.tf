@@ -97,7 +97,7 @@ variable "auth_server_claim_group" {
 
 ########### App Oauth ############################
 
-variable "app_oauth" {
+variable "oauth_apps" {
   description = "A map of objects to configure an OIDC Application"
   type = map(object({
     type                      = string

@@ -1,0 +1,47 @@
+users = {
+  "amos@konghq.com" = {
+    email      = "amos@konghq.com"
+    first_name = "Amos"
+    last_name  = "Burton"
+    password   = "Zaq12wsx!"
+    workspaces = ["default"]
+    groups     = ["app-team-group"]
+    apps       = ["proxy-app"]
+  },
+  "james@konghq.com" = {
+    email      = "james@konghq.com"
+    first_name = "James"
+    last_name  = "Holden"
+    password   = "Zaq12wsx!"
+    workspaces = ["stage"]
+    groups     = ["app-team-group"]
+    apps       = ["proxy-app"]
+  },
+  "bobbie@konghq.com" = {
+    email      = "bobbie@konghq.com"
+    first_name = "Bobbie"
+    last_name  = "Draper"
+    password   = "Zaq12wsx!"
+    workspaces = ["stage"]
+    groups     = ["app-team-group"]
+    apps       = ["proxy-app"]
+  },
+  "alex@konghq.com" = {
+    email      = "alex@konghq.com"
+    first_name = "Alex"
+    last_name  = "Kamal"
+    password   = "Zaq12wsx!"
+    workspaces = ["prod"]
+    groups     = ["app-team-group"]
+    apps       = ["proxy-app"]
+  },
+  "fred@konghq.com" = {
+    email      = "fred@konghq.com"
+    first_name = "Fred"
+    last_name  = "Johnson"
+    password   = "Zaq12wsx!"
+    workspaces = ["prod"]
+    groups     = ["app-team-group"]
+    apps       = ["proxy-app"]
+  }
+}

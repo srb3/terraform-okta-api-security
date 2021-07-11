@@ -9,7 +9,7 @@ data "http" "metadata" {
   }
 }
 
-output "auth-server-metadata-url" {
+output "metadata-url" {
   value = "${okta_auth_server.this-auth-server.issuer}/.well-known/oauth-authorization-server"
 }
 

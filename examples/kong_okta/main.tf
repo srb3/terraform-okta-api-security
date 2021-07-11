@@ -1,5 +1,5 @@
 provider "okta" {
-  org_name  = "dev-48174301"
+  org_name  = var.org_name
   base_url  = "okta.com"
   api_token = var.api_token
 }
@@ -47,6 +47,11 @@ locals {
       value      = "user.employeeNumber"
       claim_type = "RESOURCE"
     }
+    "application_id" = {
+      value      = "app.clientId"
+      claim_type = "RESOURCE"
+    }
+
   }
 
   auth_server_claim_group = {
@@ -58,8 +63,8 @@ locals {
     }
   }
 
-  app_oauth = {
-    "tf-app" = {
+  oauth_apps = {
+    "manager-app" = {
       type = "web"
       grant_types = [
         "client_credentials",
@@ -67,31 +72,48 @@ locals {
         "refresh_token",
         "implicit"
       ]
-      redirect_uris             = ["https://gui.kongcx.ninja/"]
-      login_uri                 = "https://gui.kongcx.ninja/"
-      post_logout_redirect_uris = ["https://gui.kongcx.ninja/"]
+      redirect_uris             = ["http://manager-6m6cdn.kongcx.ninja/"]
+      login_uri                 = "http://manager-6m6cdn.kongcx.ninja/"
+      post_logout_redirect_uris = ["http://manager-6m6cdn.kongcx.ninja/"]
+      consent_method            = "REQUIRED"
+      response_types            = ["token", "id_token", "code"]
+    },
+    "portal-app" = {
+      type = "web"
+      grant_types = [
+        "client_credentials",
+        "authorization_code",
+        "refresh_token",
+        "implicit"
+      ]
+      redirect_uris = [
+        "http://portalapi-etprmu.kongcx.ninja/*",
+        "http://portal-etprmu.kongcx.ninja/*",
+      ]
+      login_uri                 = "http://portal-etprmu.kongcx.ninja/"
+      post_logout_redirect_uris = ["http://portalapi-etprmu.kongcx.ninja/"]
+      consent_method            = "REQUIRED"
+      response_types            = ["token", "id_token", "code"]
+    },
+    "proxy-app" = {
+      type = "web"
+      grant_types = [
+        "client_credentials",
+        "authorization_code",
+        "implicit",
+        "refresh_token"
+      ]
+      redirect_uris = [
+        "http://swagger-petstore-6m6cdn.kongcx.ninja/*"
+      ]
+      login_uri                 = "http://swagger-petstore-6m6cdn.kongcx.ninja/"
+      post_logout_redirect_uris = ["http://swagger-petstore-6m6cdn.kongcx.ninja/"]
       consent_method            = "REQUIRED"
       response_types            = ["token", "id_token", "code"]
     }
   }
-  users = {
-    "rs@mail.com" = {
-      first_name = "Ringo"
-      last_name  = "Star"
-      email      = "rs@mail.com"
-      password   = "zaq12wsx!"
-      groups     = ["tf-admin-group"]
-      apps       = ["tf-app"]
-    }
-    "zs@mail.com" = {
-      first_name = "Ziggy"
-      last_name  = "Stardust"
-      email      = "zs@mail.com"
-      password   = "zaq12wsx!"
-      groups     = ["tf-read-only-group"]
-      apps       = ["tf-app"]
-    }
-  }
+
+  users = var.users
 }
 
 ########### Kong Auto ############################
@@ -108,7 +130,7 @@ module "okta-test" {
   auth_server_scopes           = local.auth_server_scopes
   auth_server_claim_expression = local.auth_server_claim_expression
   auth_server_claim_group      = local.auth_server_claim_group
-  app_oauth                    = local.app_oauth
+  oauth_apps                   = local.oauth_apps
   users                        = local.users
 }
 
